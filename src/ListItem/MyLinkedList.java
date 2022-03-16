@@ -20,22 +20,23 @@ public class MyLinkedList implements NodeList {
             this.root = newItem;
             return true;
         }
+
         ListItem currentItem = this.root;
-        while (currentItem != null ) {
+        while (currentItem != null) {
             int comparison = (currentItem.compareTo(newItem));
             if (comparison < 0) {
                 // newItem is greater, move right if possible
-                if(currentItem.next() != null ){
+                if (currentItem.next() != null) {
                     currentItem = currentItem.next();
                 } else {
+                    // there is no next, so insert at end of list
                     currentItem.setNext(newItem).setPrevious(currentItem);
                     return true;
                 }
-            }
-            if (comparison > 0) {
+            } else if (comparison > 0) {
                 // newItem is less, insert before
                 if (currentItem.previous() != null) {
-                    currentItem.previous().setPrevious(newItem).setPrevious(currentItem.previous());
+                    currentItem.previous().setNext(newItem).setPrevious(currentItem.previous());
                     newItem.setNext(currentItem).setPrevious(newItem);
                 } else {
                     // the node with a previous is the root
@@ -45,10 +46,11 @@ public class MyLinkedList implements NodeList {
                 return true;
             } else {
                 // equal
-                System.out.println(newItem.getValue() + " is already present, not added EQUAL");
+                System.out.println(newItem.getValue() + " is already present, not added.");
                 return false;
             }
         }
+
         return false;
     }
 
@@ -57,30 +59,32 @@ public class MyLinkedList implements NodeList {
         if (item != null) {
             System.out.println("Deleting item " + item.getValue());
         }
-        ListItem currentitem = this.root;
-        while (currentitem != null) {
-            int comparison = currentitem.compareTo(item);
+
+        ListItem currentItem = this.root;
+        while (currentItem != null) {
+            int comparison = currentItem.compareTo(item);
             if (comparison == 0) {
                 // found the item to delete
-                if (currentitem == this.root) {
-                    this.root = currentitem.next();
+                if (currentItem == this.root) {
+                    this.root = currentItem.next();
                 } else {
-                    currentitem.previous().setNext(currentitem.next());
-                    if (currentitem.next() != null) {
-                        currentitem.setPrevious(currentitem.previous());
+                    currentItem.previous().setNext(currentItem.next());
+                    if (currentItem.next() != null) {
+                        currentItem.next().setPrevious(currentItem.previous());
                     }
                 }
                 return true;
             } else if (comparison < 0) {
-                currentitem = currentitem.next();
-            } else {
-                // comparision is > 0
-                // we pass the point which we wanted to deleted
+                currentItem = currentItem.next();
+            } else { // comparison > 0
+                // We are at an item greater than the one to be deleted
                 // so the item is not in the list
                 return false;
             }
         }
-        // The end of the list
+
+        // We have reached the end of the list
+        // Without finding the item to delete
         return false;
     }
 
@@ -88,10 +92,9 @@ public class MyLinkedList implements NodeList {
     public void traverse(ListItem root) {
         if (root == null) {
             System.out.println("The list is empty");
-
         } else {
             while (root != null) {
-                System.out.println("Root " + root.getValue());
+                System.out.println(root.getValue());
                 root = root.next();
             }
         }
