@@ -1,8 +1,14 @@
 package Main;
 
+import Animal.Bird;
+import Animal.Dog;
+import Animal.Parrot;
+import Animal.Penguin;
 import Button.Button;
 import Gearbox.Gearbox;
 import ISaveable.ISaveable;
+import ListItem.MyLinkedList;
+import ListItem.Node;
 import Monster.Monster;
 import Player.Player;
 
@@ -58,18 +64,72 @@ public class Main {
         mcLaren.operateClutch(false);
         System.out.println(mcLaren.wheelSpeed(6000));*/
 
-       class ClickListner implements Button.OnClickListner {
-           public ClickListner() {
-               System.out.println("I've been attached");
-           }
+//       class ClickListner implements Button.OnClickListner {
+//           public ClickListner() {
+//               System.out.println("I've been attached");
+//           }
+//
+//           @Override
+//           public void onClick(String title) {
+//               System.out.println(title + " was clicked");
+//           }
+//       }
+//       btnPrint.setOnClickListner(new ClickListner());
+        /*btnPrint.setOnClickListner(new Button.OnClickListner() {
+            @Override
+            public void onClick(String title) {
+                System.out.println( title + " -> I have been clicked Wheee");
+            }
+        });
+       listen();*/
 
-           @Override
-           public void onClick(String title) {
-               System.out.println(title + " was clicked");
-           }
-       }
-       btnPrint.setOnClickListner(new ClickListner());
-       listen();
+        /*Dog dog = new Dog("Reksio");
+        dog.eat();
+        dog.breathe();
+
+        Parrot parrot = new Parrot("Parrot");
+        parrot.eat();
+        parrot.breathe();
+        parrot.fly();
+
+        Penguin penguin = new Penguin("Penguin");
+        penguin.fly();*/
+
+        MyLinkedList myLinkedList = new MyLinkedList(null);
+        myLinkedList.traverse(myLinkedList.getRoot());
+
+//        String stringData = "Darwin Brisbane Perth Melbourne Canberra Adelaide Sydney Canberra";
+        String stringData = "5 7 3 9 8 2 1 0 4 6";
+        String[] data = stringData.split(" ");
+        for (String string : data) {
+            myLinkedList.addItem(new Node(string));
+        }
+
+        myLinkedList.traverse(myLinkedList.getRoot());
+        myLinkedList.removeItem(new Node("3"));
+        myLinkedList.traverse(myLinkedList.getRoot());
+
+        myLinkedList.removeItem(new Node("5"));
+        myLinkedList.traverse(myLinkedList.getRoot());
+
+        myLinkedList.removeItem(new Node("0"));
+        myLinkedList.removeItem(new Node("4"));
+        myLinkedList.removeItem(new Node("2"));
+
+        myLinkedList.removeItem(new Node("9"));
+        myLinkedList.traverse(myLinkedList.getRoot());
+
+
+        myLinkedList.removeItem(new Node("8"));
+        myLinkedList.traverse(myLinkedList.getRoot());
+        myLinkedList.removeItem(new Node("6"));
+        myLinkedList.traverse(myLinkedList.getRoot());
+
+        myLinkedList.removeItem(new Node(myLinkedList.getRoot()));
+        myLinkedList.traverse(myLinkedList.getRoot());
+        myLinkedList.removeItem(new Node(myLinkedList.getRoot()));
+        myLinkedList.traverse(myLinkedList.getRoot());
+
 
     }
 
