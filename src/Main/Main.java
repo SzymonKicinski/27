@@ -1,17 +1,14 @@
 package Main;
 
-import Animal.Bird;
-import Animal.Dog;
-import Animal.Parrot;
-import Animal.Penguin;
 import Button.Button;
-import Gearbox.Gearbox;
+
 import ISaveable.ISaveable;
-import ListItem.MyLinkedList;
-import ListItem.Node;
+import League.League;
+import League.FootballPlayer;
+import League.BaseballPlayer;
+import League.Team;
+import League.SoccerPlayer;
 import ListItem.SearchTree;
-import Monster.Monster;
-import Player.Player;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -103,34 +100,72 @@ public class Main {
 //        String stringData = "Darwin Brisbane Perth Melbourne Canberra Adelaide Sydney Canberra";
 
 
-        String[] data = stringData.split(" ");
-        for (String s : data) {
-            tree.addItem(new Node(s));
-        }
+//        String[] data = stringData.split(" ");
+//        for (String s : data) {
+//            tree.addItem(new Node(s));
+//        }
+//
+//
+//        tree.traverse(tree.getRoot());
+//        tree.removeItem(new Node("3"));
+//        tree.traverse(tree.getRoot());
+//
+//        tree.removeItem(new Node("5"));
+//        tree.traverse(tree.getRoot());
+//
+//        tree.removeItem(new Node("0"));
+//        tree.removeItem(new Node("4"));
+//        tree.removeItem(new Node("2"));
+//        tree.traverse(tree.getRoot());
+//
+//        tree.removeItem(new Node("9"));
+//        tree.traverse(tree.getRoot());
+//        tree.removeItem(new Node("8"));
+//        tree.traverse(tree.getRoot());
+//        tree.removeItem(new Node("6"));
+//        tree.traverse(tree.getRoot());
+//        tree.removeItem(tree.getRoot());
+//        tree.traverse(tree.getRoot());
+//        tree.removeItem(tree.getRoot());
+//        tree.traverse(tree.getRoot());
 
+        League<Team<FootballPlayer>> footballLeague = new League<>("AFL");
+        Team<FootballPlayer> adelaideCrows = new Team<>("Adelaide Crows");
+        Team<FootballPlayer> melbourne = new Team<>("Melbourne");
+        Team<FootballPlayer> hawthorn = new Team<>("Hawthorn");
+        Team<FootballPlayer> fremantle = new Team<>("Fremantle");
+        Team<BaseballPlayer> baseballTeam = new Team<>("Chicago Cubs");
 
-        tree.traverse(tree.getRoot());
-        tree.removeItem(new Node("3"));
-        tree.traverse(tree.getRoot());
+        hawthorn.matchResult(fremantle, 1, 0);
+        hawthorn.matchResult(adelaideCrows, 3, 8);
 
-        tree.removeItem(new Node("5"));
-        tree.traverse(tree.getRoot());
+        adelaideCrows.matchResult(fremantle, 2, 1);
 
-        tree.removeItem(new Node("0"));
-        tree.removeItem(new Node("4"));
-        tree.removeItem(new Node("2"));
-        tree.traverse(tree.getRoot());
+        footballLeague.add(adelaideCrows);
+        footballLeague.add(melbourne);
+        footballLeague.add(hawthorn);
+        footballLeague.add(fremantle);
 
-        tree.removeItem(new Node("9"));
-        tree.traverse(tree.getRoot());
-        tree.removeItem(new Node("8"));
-        tree.traverse(tree.getRoot());
-        tree.removeItem(new Node("6"));
-        tree.traverse(tree.getRoot());
-        tree.removeItem(tree.getRoot());
-        tree.traverse(tree.getRoot());
-        tree.removeItem(tree.getRoot());
-        tree.traverse(tree.getRoot());
+//        footballLeague.add(baseballTeam);
+        footballLeague.showLeagueTable();
+
+        BaseballPlayer pat = new BaseballPlayer("Pat");
+        SoccerPlayer beckham = new SoccerPlayer("Beckham");
+        Team rawTeam = new Team("Raw Team");
+        rawTeam.addPlayer(beckham); // unchecked warning
+        rawTeam.addPlayer(pat);     // unchecked warning
+
+        footballLeague.add(rawTeam);     // unchecked warning
+
+        League<Team> rawLeague = new League<>("Raw");
+        rawLeague.add(adelaideCrows);     // no warning
+        rawLeague.add(baseballTeam);    // no warning
+        rawLeague.add(rawTeam);         // no warning
+
+        League reallyRaw = new League("Really raw");
+        reallyRaw.add(adelaideCrows);     // unchecked warning
+        reallyRaw.add(baseballTeam);    // unchecked warning
+        reallyRaw.add(rawTeam);         // unchecked warning
 
 
     }
